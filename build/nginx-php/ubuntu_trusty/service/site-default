@@ -34,6 +34,9 @@ server {
         fastcgi_index index.php;
         include fastcgi_params;
         fastcgi_param HTTPS off;
+        fastcgi_connect_timeout 300;
+        fastcgi_send_timeout 300;
+        fastcgi_read_timeout 300;
     }
 
     # Deny .htaccess file access
