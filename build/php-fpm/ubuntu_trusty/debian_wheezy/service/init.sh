@@ -6,7 +6,7 @@ then
     LISTEN=9000
 fi
 
-sed -i "s#^listen = .*#listen = $LISTEN#g" /etc/php5/fpm/pool.d/www.conf
+sed -i "s#^listen = .*#listen = 127.0.0.1:$LISTEN#g" /etc/php5/fpm/pool.d/www.conf
 
 # Use the TZ environment variable, otherwise use UTC
 PHP_TIMEZONE="UTC"
