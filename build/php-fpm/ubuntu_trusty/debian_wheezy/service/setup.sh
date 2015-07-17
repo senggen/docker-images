@@ -2,8 +2,10 @@
 # Setup PHP
 sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /etc/php5/fpm/php-fpm.conf
 
-sed -i "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/" /etc/php5/fpm/php.ini
+sed -i "s/;cgi.fix_pathinfo=0/cgi.fix_pathinfo=1/" /etc/php5/fpm/php.ini
 sed -i "s#^max_execution_time = .*#max_execution_time = 300#g" /etc/php5/fpm/php.ini
+sed -i "s#^doc_root =.*#doc_root = /var/www/html/#g" /etc/php5/fpm/php.ini
+echo "open_basedir = /var/www/html/" >> /etc/php5/fpm/php.ini
 
 # Configure PHP-FPM to start as a service
 cp -a /build/php-fpm/init.sh /opt/init-php-fpm.sh
@@ -21,7 +23,5 @@ sed -i "s#^pm.max_children = .*#pm.max_children = 35#g" /etc/php5/fpm/pool.d/www
 sed -i "s#^pm.max_requests = .*#pm.max_requests = 10000#g" /etc/php5/fpm/pool.d/www.conf
 
 sed -i '/^listen /c \
-listen = 0.0.0.0:9000' /etc/php5/fpm/pool.d/www.conf 
+listen = 127.0.0.1:9000' /etc/php5/fpm/pool.d/www.conf 
 echo "request_terminate_timeout = 0" >> /etc/php5/fpm/pool.d/www.conf
-
-mkdir /var/run/sshd
