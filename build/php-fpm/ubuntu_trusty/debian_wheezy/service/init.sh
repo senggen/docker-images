@@ -44,5 +44,5 @@ do
     set_phpfpm_env_var $var $val
 done
 
-exec sshd
+exec /etc/init.d/ssh start
 exec php5-fpm -c /etc/php5/fpm
