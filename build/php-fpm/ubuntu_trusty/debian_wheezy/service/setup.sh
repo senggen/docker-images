@@ -13,9 +13,11 @@ php5enmod mcrypt
 # Ensure the mode is correct on the unix socket
 sed -i 's#;listen.mode = 0660#listen.mode = 0666#g' /etc/php5/fpm/pool.d/www.conf
 sed -i -e "s/;pm\s*=\s*static/pm = dynamic/g" /etc/php5/fpm/pool.d/www.conf
-sed -i "s#^pm.start_servers = .*#pm.start_servers  = 20#g" /etc/php5/fpm/pool.d/www.conf
+# min_spare_servers ≤ start_servers ≤ max_spare_servers ≤ max_children
 sed -i "s#^pm.min_spare_servers = .*#pm.min_spare_servers = 5#g" /etc/php5/fpm/pool.d/www.conf
+sed -i "s#^pm.start_servers = .*#pm.start_servers  = 20#g" /etc/php5/fpm/pool.d/www.conf
 sed -i "s#^pm.max_spare_servers = .*#pm.max_spare_servers = 35#g" /etc/php5/fpm/pool.d/www.conf
 sed -i "s#^pm.max_children = .*#pm.max_children = 35#g" /etc/php5/fpm/pool.d/www.conf
 sed -i "s#^pm.max_requests = .*#pm.max_requests = 10000#g" /etc/php5/fpm/pool.d/www.conf
+
 echo "request_terminate_timeout = 0" >> /etc/php5/fpm/pool.d/www.conf
