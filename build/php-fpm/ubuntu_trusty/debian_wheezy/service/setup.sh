@@ -21,7 +21,9 @@ sed -i "s#^pm.start_servers = .*#pm.start_servers  = 20#g" /etc/php5/fpm/pool.d/
 sed -i "s#^pm.max_spare_servers = .*#pm.max_spare_servers = 35#g" /etc/php5/fpm/pool.d/www.conf
 sed -i "s#^pm.max_children = .*#pm.max_children = 35#g" /etc/php5/fpm/pool.d/www.conf
 sed -i "s#^pm.max_requests = .*#pm.max_requests = 10000#g" /etc/php5/fpm/pool.d/www.conf
+# sed -i 's#;php_admin_value[error_log] =.*#php_admin_value[error_log] = /var/log/fpm-php.www.log#g' /etc/php5/fpm/pool.d/www.conf
+# sed -i 's#;php_admin_flag[log_errors] =.*#php_admin_flag[log_errors] = on#g' /etc/php5/fpm/pool.d/www.conf
 
 sed -i '/^listen /c \
-listen = 127.0.0.1:9000' /etc/php5/fpm/pool.d/www.conf 
+listen = 9000' /etc/php5/fpm/pool.d/www.conf 
 echo "request_terminate_timeout = 0" >> /etc/php5/fpm/pool.d/www.conf
