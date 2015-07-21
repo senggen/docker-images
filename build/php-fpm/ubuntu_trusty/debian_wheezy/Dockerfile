@@ -1,6 +1,10 @@
 FROM debian:wheezy
 MAINTAINER Alexander Reece <alreece45@gmail.com>
 
+#RUN echo 'deb http://us.archive.ubuntu.com/ubuntu precise main universe' > /etc/apt/sources.list &&\
+#	apt-get update && \
+#	apt-get -y upgrade
+
 # Build packages first
 COPY ./packages.sh /build/packages.sh
 RUN /build/packages.sh
